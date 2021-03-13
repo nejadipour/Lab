@@ -1,15 +1,17 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A class to hold details of audio files.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Alireza Nejadipour
+ * @version 2021.Mar.13
  */
+
 public class MusicCollection
 {
     // An ArrayList for storing the file names of music files.
-    private ArrayList<String> files;
+    private ArrayList<Music> files;
     // A player for the music files.
     private MusicPlayer player;
 
@@ -19,13 +21,14 @@ public class MusicCollection
     public MusicCollection()
     {
 
+
     }
 
     /**
      * Add a file to the collection.
      * @param filename The file to be added.
      */
-    public void addFile(String filename)
+    public void addFile(Music filename)
     {
 
     }
@@ -36,15 +39,32 @@ public class MusicCollection
      */
     public int getNumberOfFiles()
     {
-
+        return files.size();
     }
 
     /**
      * List a file from the collection.
-     * @param index The index of the file to be listed.
+     * @param genre The index of the file to be listed.
      */
-    public void listFile(int index)
+    public void listFile(String genre)
     {
+        int index = 0;
+
+        while (index < files.size())
+        {
+            String currentGenre = files.get(index).getGenre();
+
+            if (currentGenre.contains(genre))
+            {
+                files.get(index).print();
+                break;
+            }
+            else
+            {
+                index++;
+            }
+
+        }
 
     }
 
@@ -53,15 +73,29 @@ public class MusicCollection
      */
     public void listAllFiles()
     {
+        for(Music file : files)
+        {
+            file.print();
+            System.out.println("__________________________");
+        }
 
     }
 
     /**
      * Remove a file from the collection.
-     * @param index The index of the file to be removed.
+     * @param name The index of the file to be removed.
      */
-    public void removeFile(int index)
+    public void removeFile(String name)
     {
+        Iterator<Music> it = files.iterator();
+        while(it.hasNext())
+        {
+            Music music = it.next();
+            if(name.contains(music.getName()))
+            {
+                it.remove();
+            }
+        }
 
     }
 
@@ -90,10 +124,10 @@ public class MusicCollection
      * @param index The index to be checked.
      * @return true if the index is valid, false otherwise.
      */
-    private boolean validIndex(int index)
-    {
-        // The return value.
-        // Set according to whether the index is valid or not.
-
-    }
+//    private boolean validIndex(int index)
+//    {
+//        // The return value.
+//        // Set according to whether the index is valid or not.
+//
+//    }
 }
