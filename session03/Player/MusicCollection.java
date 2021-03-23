@@ -41,6 +41,8 @@ public class MusicCollection
             {
                 System.out.println("Music " + musicNum + ":");
                 music.print();
+                
+            musicNum++;    
 
             }
 
@@ -115,6 +117,8 @@ public class MusicCollection
             {
                 System.out.println("Artist " + artistNum + ":");
                 artist.print();
+                
+                artistNum++;
 
             }
 
@@ -192,17 +196,19 @@ public class MusicCollection
             {
                 System.out.println("Genre " + genreNum + ":");
                 genre.print();
+                
+                genreNum++;
 
             }
 
         }
 
         return true;
-        
+
 
     }
-    
-    
+
+
     public void addGenre(Genre genre)
     {
         if (findGenre(genre.getName()) == null)
@@ -216,10 +222,10 @@ public class MusicCollection
             System.out.println("Genre already exists.");
 
         }
-        
+
     }
-    
-    
+
+
     public Genre findGenre(String name)
     {
         for(Genre genre : genres)
@@ -232,10 +238,10 @@ public class MusicCollection
         }
 
         return null;
-        
+
     }
-    
-    
+
+
     public void removeGenre(String name)
     {
         Genre genreToRemove = findGenre(name);
@@ -251,7 +257,7 @@ public class MusicCollection
             System.out.println("Genre removed.");
 
         }
-        
+
     }
 
 
