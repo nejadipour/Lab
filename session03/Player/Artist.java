@@ -11,4 +11,76 @@ public class Artist
 {
     private String name;
     private ArrayList<Music> musics;
+    private Genre genre;
+
+    public Artist(String name)
+    {
+        this.name = name;
+        musics = new ArrayList<>();
+        
+    }
+
+
+    public void addMusic(Music music)
+    {
+        if (findMusic(music.getName()) == null)
+        {
+            musics.add(music);
+            System.out.println("Music added.");
+
+        }
+        else
+        {
+            System.out.println("Music is already available.");
+
+        }
+
+    }
+
+
+    public Music findMusic(String name)
+    {
+        for (Music music : musics)
+        {
+            if (music.getName().equals(name))
+            {
+                return music;
+                
+            }
+
+        }
+
+        return null;
+    }
+
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public ArrayList<Music> getMusics()
+    {
+        return musics;
+    }
+
+    public void setMusics(ArrayList<Music> musics)
+    {
+        this.musics = musics;
+    }
+
+    public Genre getGenre()
+    {
+        return genre;
+    }
+
+    public void setGenre(Genre genre)
+    {
+        this.genre = genre;
+    }
 }
