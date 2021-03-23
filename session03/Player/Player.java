@@ -16,6 +16,7 @@ public class Player
     long currentFrame;
     Clip clip;
     private String playerMenu;
+    private Scanner scanner;
 
     // current status of clip
     String status;
@@ -47,10 +48,12 @@ public class Player
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
 
+        scanner = new Scanner(System.in);
+
     }
 
 
-    public static void startPlay(String filePath)
+    public static boolean startPlay(String filePath)
     {
         try
         {
@@ -58,24 +61,22 @@ public class Player
 
             audioPlayer.play();
 
-            Scanner sc = new Scanner(System.in);
-
             while (true)
             {
                 audioPlayer.printPlayerMenu();
 
-                int c = sc.nextInt();
-                audioPlayer.gotoChoice(c);
-                if (c == 3)
-                    break;
+                if (audioPlayer.userChoice())
+                {
+                    return true;
+                }
+
             }
-            sc.close();
+
         }
 
         catch (Exception ex)
         {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
+            return false;
 
         }
 
@@ -89,10 +90,14 @@ public class Player
 
     // Work as the user enters his choice
 
-    private void gotoChoice(int c)
+    private boolean userChoice()
             throws IOException, LineUnavailableException, UnsupportedAudioFileException
     {
-        switch (c)
+        int choice;
+        System.out.print("Your choice : ");
+        choice = scanner.nextInt();
+
+        switch (choice)
         {
             case 1:
                 pause();
@@ -103,15 +108,19 @@ public class Player
                 break;
 
             case 3:
-                break;
+                pause();
+                return true; //means music is finished
 
             default:
             {
                 System.out.println("Invalid input.");
+                userChoice();
 
             }
 
         }
+
+        return false;
 
     }
 
