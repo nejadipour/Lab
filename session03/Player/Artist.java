@@ -17,7 +17,7 @@ public class Artist
     {
         this.name = name;
         musics = new ArrayList<>();
-        
+
     }
 
 
@@ -45,12 +45,44 @@ public class Artist
             if (music.getName().equals(name))
             {
                 return music;
-                
+
             }
 
         }
 
         return null;
+    }
+
+
+    public void print()
+    {
+        System.out.println(getName() + " | " + getMusics().size() + " musics");
+    }
+
+
+    public boolean printMusics()
+    {
+        int musicNum = 1;
+
+        if (musics.size() == 0)
+        {
+            System.out.println("No music found.");
+            return false;
+
+        }
+        else
+        {
+            for (Music music : musics)
+            {
+                System.out.println("Music " + musicNum + ":");
+                music.print();
+
+            }
+
+            return true;
+
+        }
+
     }
 
 
