@@ -8,12 +8,15 @@ public class Run
     private int choice;
     private Scanner scanner;
     private MusicCollection runtimeMusicCollection;
+    private Player player;
 
     public Run()
     {
+
         runtimeMusicCollection = new MusicCollection();
 
         scanner = new Scanner(System.in).useDelimiter("\n");
+
 
         mainMenu =
                 "1.Musics\n" +
@@ -63,7 +66,7 @@ public class Run
         System.out.println(musicsMenu);
 
         userChoice();
-
+        //E:\\Alireza\\aProgramming\\wav\\ahange shad.wav
         switch (choice)
         {
             case 1:
@@ -71,6 +74,8 @@ public class Run
                 {
                     userChoice();
                     // TODO: 3/23/2021 play the music by its address
+                    String address = runtimeMusicCollection.getMusics().get(choice - 1).getAddress();
+                    Player.startPlay(address);
                 }
                 else
                 {
@@ -118,20 +123,20 @@ public class Run
         runtimeMusicCollection.addMusic(musicToAdd);
 
         // TODO: 3/23/2021 after adding music to musics list artists and genres should be updated too
-        
+
 
     }
-    
-    
+
+
     public void removeMusic()
     {
         System.out.print("Enter the address : ");
         String address = scanner.next();
-        
+
         runtimeMusicCollection.removeMusic(address);
 
         // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
-        
+
     }
 
 
@@ -141,6 +146,9 @@ public class Run
 
         run.printManiMenu();
     }
+
+
+
 
 
 
