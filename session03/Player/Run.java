@@ -23,20 +23,20 @@ public class Run
                 "1.Musics\n" +
                 "2.Artists\n" +
                 "3.Genres\n" +
-                "4.Exit";
+                "4.Exit\n";
 
         musicsMenu =
                 "1.Show musics\n" +
                 "2.Add music\n" +
                 "3.Remove music\n" +
                 "4.Main menu\n";
-        
+
         artistsMenu =
                 "1.Show artists\n" +
                 "2.Add artist\n" +
                 "3.Remove artist\n" +
                 "4.Main menu\n";
-        
+
         genresMenu =
                 "1.Show generes\n" +
                 "2.Add genre\n" +
@@ -76,6 +76,7 @@ public class Run
                 System.exit(0);
                 break;
         }
+
     }
 
 
@@ -167,33 +168,84 @@ public class Run
         // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
 
     }
-    
-    
+
+
     public void printArtistsMenu()
     {
         System.out.println(artistsMenu);
-        
+
         userChoice();
-        
+
         switch (choice)
         {
             case 1:
+                if (runtimeMusicCollection.displayArtists())
+                {
+                    userChoice();
+                    Artist artist = runtimeMusicCollection.getArtists().get(choice - 1);
+
+                    if(artist.printMusics())
+                    {
+                        userChoice();
+
+                        String address = runtimeMusicCollection.getMusics().get(choice - 1).getAddress();
+
+                        if (Player.startPlay(address))
+                        {
+                            System.out.println("Music finished.");
+
+                        }
+                        else
+                        {
+                            System.out.println("Couldn't open the file.");
+
+                        }
+
+                    }
+                    else
+                    {
+                        printArtistsMenu();
+
+                    }
+
+                }
+                else
+                {
+                    printArtistsMenu();
+
+                }
                 break;
-                
+
             case 2:
+                addArtist();
+                printArtistsMenu();
                 break;
-                
+
             case 3:
+                removeArtist();
+                printArtistsMenu();
                 break;
-                
+
             case 4:
                 printManiMenu();
                 break;
         }
-        
+
     }
-    
-    
+
+
+    public void addArtist()
+    {
+        System.out.print("Enter the name of artist : ");
+        String name = scanner.next();
+
+        Artist artistToAdd = new Artist(name);
+
+        runtimeMusicCollection.addArtist(artistToAdd);
+
+    }
+
+
     public void prinGenresMenu()
     {
         System.out.println(genresMenu);
@@ -215,7 +267,17 @@ public class Run
                 printManiMenu();
                 break;
         }
-        
+
+    }
+
+
+    public void removeArtist()
+    {
+        System.out.print("Enter the name : ");
+        String name = scanner.next();
+
+        runtimeMusicCollection.removeArtist(name);
+
     }
 
 
