@@ -20,13 +20,15 @@ public class Player
     String status;
 
     AudioInputStream audioInputStream;
-    static String filePath;
+    private String filePath;
 
     // constructor to initialize streams and clip
-    public Player()
+    public Player(String filePath)
             throws UnsupportedAudioFileException,
             IOException, LineUnavailableException
     {
+        this.filePath = filePath;
+
         // create AudioInputStream object
         audioInputStream =
                 AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
@@ -42,15 +44,16 @@ public class Player
     }
 
 
-    public static void main(String[] args)
+    public static void startPlay(String filePath)
     {
         try
         {
-            filePath = "E:\\Alireza\\aProgramming\\wav\\YAS-_-BARCODE.wav";
+
             Player audioPlayer =
-                    new Player();
+                    new Player(filePath);
 
             audioPlayer.play();
+
             Scanner sc = new Scanner(System.in);
 
             while (true)
@@ -137,7 +140,7 @@ public class Player
         clip.close();
         resetAudioStream();
         clip.setMicrosecondPosition(currentFrame);
-        play();
+        this.play();
     }
 
 
@@ -150,5 +153,6 @@ public class Player
         clip.open(audioInputStream);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
+    
 
 } 
