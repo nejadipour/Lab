@@ -52,7 +52,7 @@ public class MusicCollection
     }
 
 
-    public void addMusic(Music music)
+    public boolean addMusic(Music music)
     {
         if (findMusic(music.getAddress()) == null)
         {
@@ -76,12 +76,13 @@ public class MusicCollection
             }
             genre.addMusic(music);
 
-            System.out.println("Music added.");
+            return true;
+
 
         }
         else
         {
-            System.out.println("Music is already available.");
+            return false;
 
         }
 
@@ -148,17 +149,17 @@ public class MusicCollection
     }
 
 
-    public void addArtist(Artist artist)
+    public boolean addArtist(Artist artist)
     {
         if (findArtist(artist.getName()) == null)
         {
             artists.add(artist);
-            System.out.println("Artist added.");
+            return true;
 
         }
         else
         {
-            System.out.println("Artist already exists.");
+            return false;
 
         }
 
@@ -228,17 +229,18 @@ public class MusicCollection
     }
 
 
-    public void addGenre(Genre genre)
+    public boolean addGenre(Genre genre)
     {
         if (findGenre(genre.getName()) == null)
         {
             genres.add(genre);
-            System.out.println("Genre added.");
+            return true;
+
 
         }
         else
         {
-            System.out.println("Genre already exists.");
+            return false;
 
         }
 
