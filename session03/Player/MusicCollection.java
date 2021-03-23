@@ -41,8 +41,8 @@ public class MusicCollection
             {
                 System.out.println("Music " + musicNum + ":");
                 music.print();
-                
-            musicNum++;    
+
+            musicNum++;
 
             }
 
@@ -57,6 +57,25 @@ public class MusicCollection
         if (findMusic(music.getAddress()) == null)
         {
             musics.add(music);
+
+            String artistName = music.getArtist();
+            Artist artist = findArtist(artistName);
+            if (artist == null)
+            {
+                artist = new Artist(artistName);
+                artists.add(artist);
+            }
+            artist.addMusic(music);
+
+            String genreName = music.getGenre();
+            Genre genre = findGenre(genreName);
+            if (genre == null)
+            {
+                genre = new Genre(genreName);
+                genres.add(genre);
+            }
+            genre.addMusic(music);
+
             System.out.println("Music added.");
 
         }
@@ -117,7 +136,7 @@ public class MusicCollection
             {
                 System.out.println("Artist " + artistNum + ":");
                 artist.print();
-                
+
                 artistNum++;
 
             }
@@ -196,7 +215,7 @@ public class MusicCollection
             {
                 System.out.println("Genre " + genreNum + ":");
                 genre.print();
-                
+
                 genreNum++;
 
             }
