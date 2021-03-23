@@ -26,6 +26,7 @@ public class Genre
         if (findMusic(music.getName()) == null)
         {
             musics.add(music);
+            System.out.println("Music added.");
 
         }
         else
@@ -48,6 +49,38 @@ public class Genre
 
         }
 
+        return null;
+    }
+    
+    
+    public void addArtist(Artist artist)
+    {
+        if (findArtist(artist.getName()) == null)
+        {
+            artists.add(artist);
+            System.out.println("Artist added.");
+            
+        }
+        
+        else
+        {
+            System.out.println("Artist is available.");
+        }
+        
+    }
+    
+    
+    public Artist findArtist(String name)
+    {
+        for (Artist artist : artists)
+        {
+            if (artist.getName().equals(name))
+            {
+                return artist;
+            }
+            
+        }
+        
         return null;
     }
 
