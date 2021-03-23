@@ -1,130 +1,108 @@
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
-public class Run
+/**
+ * A class to hold details of audio files.
+ *
+ * @author Alireza Nejadipour
+ * @version 2021.Mar.13
+ */
+
+public class MusicCollection
 {
-    private String mainMenu;
-    private String musicsMenu;
-    private int choice;
-    private Scanner scanner;
-    private MusicCollection runtimeMusicCollection;
+    private ArrayList<Artist> artists;
+    private ArrayList<Music> musics;
+    private ArrayList<Genre> genres;
 
-    public Run()
+
+    public MusicCollection()
     {
-        runtimeMusicCollection = new MusicCollection();
+        artists = new ArrayList<>();
+        musics = new ArrayList<>();
+        genres = new ArrayList<>();
 
-        scanner = new Scanner(System.in).useDelimiter("\n");
 
-        mainMenu =
-                "1.Musics\n" +
-                        "2.Artists\n" +
-                        "3.Genres\n";
-
-        musicsMenu =
-                "1.Show musics\n" +
-                        "2.Add music\n" +
-                        "3.Remove music\n" +
-                        "4.Main menu\n";
-
-    }
-
-    public void userChoice()
-    {
-        System.out.print("Your Choice : ");
-        choice = scanner.nextInt();
 
     }
 
 
-    public void printManiMenu()
+    public boolean displayMusics()
     {
-        System.out.println(mainMenu);
-        userChoice();
+        int musicNum = 1;
 
-        switch (choice)
+        if (musics.size() == 0)
         {
-            case 1:
-                printMusicsMenu();
-                break;
-            case 2:
-                break;
+            System.out.println("No music found.");
+            return false;
 
-            case 3:
-                break;
-
-            case 4:
-                break;
         }
-    }
-
-
-    public void printMusicsMenu()
-    {
-        System.out.println(musicsMenu);
-
-        userChoice();
-
-        switch (choice)
+        else
         {
-            case 1:
-                if(runtimeMusicCollection.displayMusics())
-                {
-                    userChoice();
-                    // TODO: 3/23/2021 play the music by its address
-                }
-                else
-                {
-                    printMusicsMenu();
-                }
-                break;
+            for (Music music : musics)
+            {
+                System.out.println("Music " + musicNum + ":");
+                music.print();
 
-            case 2:
-                addMusic();
-                printMusicsMenu();
-                break;
+            }
 
-            case 3:
-                //runtimeMusicCollection.removeMusic();
-                printManiMenu();
-                break;
-
-            case 4:
-                printManiMenu();
-                break;
+            return true;
 
         }
     }
 
 
-    public void addMusic()
+    public void addMusic(Music music)
     {
-        System.out.print("Enter the name : ");
-        String name = scanner.next();
-        
-        System.out.print("Enter the artist : ");
-        String artistName = scanner.next();
+        if (findMusic(music.getAddress()) == null)
+        {
+            musics.add(music);
+            System.out.println("Music added.");
 
-        System.out.print("Enter the genre : ");
-        String genre = scanner.next();
+        }
+        else
+        {
+            System.out.println("Music is already available.");
 
-        System.out.print("Enter the address : ");
-        String address = scanner.next();
+        }
 
-        System.out.print("Enter the year : ");
-        int year = scanner.nextInt();
-
-        Music musicToAdd = new Music(name, genre, artistName, address, year);
-
-        runtimeMusicCollection.addMusic(musicToAdd);
-        
     }
 
 
-    public static void main(String[] args)
+    public Music findMusic(String address)
     {
-        Run run = new Run();
+        for (Music music : musics)
+        {
+            if (music.getAddress().equals(address))
+            {
+                return music;
 
-        run.printManiMenu();
+            }
+
+        }
+
+        return null;
+    }
+
+
+    public void removeMusic(String address)
+    {
+        Music musicToRemove = findMusic(address);
+
+        if (musicToRemove == null)
+        {
+            System.out.println("Music is not available.");
+        }
+        else
+        {
+            musics.remove(musicToRemove);
+            System.out.println("Music removed.");
+        }
+
+
+
+
+
     }
 
 
