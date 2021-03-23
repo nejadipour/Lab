@@ -7,7 +7,7 @@ public class Run
     private String musicsMenu;
     private int choice;
     private Scanner scanner;
-    private MusicCollection runtimeMusicCollection;
+    public MusicCollection runtimeMusicCollection;
     private Player player;
 
     public Run()
@@ -73,9 +73,21 @@ public class Run
                 if(runtimeMusicCollection.displayMusics())
                 {
                     userChoice();
-                    // TODO: 3/23/2021 play the music by its address
+
                     String address = runtimeMusicCollection.getMusics().get(choice - 1).getAddress();
-                    Player.startPlay(address);
+                    if (Player.startPlay(address))
+                    {
+                        System.out.println("Music finished.");
+                        printManiMenu();
+
+                    }
+                    else
+                    {
+                        System.out.println("Couldn't open the file.");
+                        printManiMenu();
+
+                    }
+
                 }
                 else
                 {
