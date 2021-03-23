@@ -100,12 +100,13 @@ public class MusicCollection
     }
 
 
-    public boolean displayArtists(Artist artist)
+    public boolean displayArtists()
     {
         int artistNum = 1;
 
-        if (findArtist(artist.getName()) == null)
+        if (artists.size() == 0)
         {
+            System.out.println("No artist found.");
             return false;
         }
         else
@@ -130,12 +131,12 @@ public class MusicCollection
         {
             artists.add(artist);
             System.out.println("Artist added.");
-            
+
         }
         else
         {
             System.out.println("Artist already exists.");
-            
+
         }
 
     }
@@ -160,20 +161,29 @@ public class MusicCollection
     public void removeArtist(String name)
     {
         Artist artistToRemove = findArtist(name);
-        
+
         if (artistToRemove == null)
         {
             System.out.println("Artist doesn't exist.");
-            
+
         }
         else
         {
             artists.remove(artistToRemove);
             System.out.println("Artist removed.");
-            
+
         }
 
     }
+    
+    
+    public void displayGenres()
+    {
+        
+    }
+    
+    
+    
 
     public ArrayList<Artist> getArtists()
     {
