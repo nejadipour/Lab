@@ -22,8 +22,6 @@ public class MusicCollection
         musics = new ArrayList<>();
         genres = new ArrayList<>();
 
-
-
     }
 
 
@@ -99,12 +97,111 @@ public class MusicCollection
             System.out.println("Music removed.");
         }
 
+    }
 
 
+    public boolean displayArtists(Artist artist)
+    {
+        int artistNum = 1;
 
+        if (findArtist(artist.getName()) == null)
+        {
+            return false;
+        }
+        else
+        {
+            for(Artist artistToDisplay : artists)
+            {
+                System.out.println("Artist " + artistNum + ":");
+                artistToDisplay.print();
+
+            }
+
+        }
+
+        return true;
 
     }
 
 
+    public void addArtist(Artist artist)
+    {
+        if (findArtist(artist.getName()) == null)
+        {
+            artists.add(artist);
+            System.out.println("Artist added.");
+            
+        }
+        else
+        {
+            System.out.println("Artist already exists.");
+            
+        }
 
+    }
+
+
+    public Artist findArtist(String name)
+    {
+        for(Artist artist : artists)
+        {
+            if(artist.getName().equals(name))
+            {
+                return artist;
+
+            }
+        }
+
+        return null;
+
+    }
+
+
+    public void removeArtist(String name)
+    {
+        Artist artistToRemove = findArtist(name);
+        
+        if (artistToRemove == null)
+        {
+            System.out.println("Artist doesn't exist.");
+            
+        }
+        else
+        {
+            artists.remove(artistToRemove);
+            System.out.println("Artist removed.");
+            
+        }
+
+    }
+
+    public ArrayList<Artist> getArtists()
+    {
+        return artists;
+    }
+
+    public void setArtists(ArrayList<Artist> artists)
+    {
+        this.artists = artists;
+    }
+
+    public ArrayList<Music> getMusics()
+    {
+        return musics;
+    }
+
+    public void setMusics(ArrayList<Music> musics)
+    {
+        this.musics = musics;
+    }
+
+    public ArrayList<Genre> getGenres()
+    {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres)
+    {
+        this.genres = genres;
+    }
 }
