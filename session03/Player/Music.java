@@ -1,5 +1,5 @@
 /**
- * A class to hold details each music
+ * A class to hold details of each music
  *
  * @author Alireza Nejadipour
  * @version 2021.Mar.13
@@ -9,10 +9,25 @@
 public class Music
 {
     private String name;
-    private String genere;
+    private String genre;
     private String artist;
     private String address;
     private int year;
+
+    public Music(String name, String genre, String artist, String address, int year)
+    {
+        this.name = name;
+        this.genre = genre;
+        this.artist = artist;
+        this.address = address;
+        this.year = year;
+        
+    }
+
+    public void print()
+    {
+
+    }
 
 
     public int getYear()
@@ -30,9 +45,9 @@ public class Music
         return artist;
     }
 
-    public String getGenere()
+    public String getGenre()
     {
-        return genere;
+        return genre;
     }
 
     public String getName()
@@ -50,9 +65,9 @@ public class Music
         this.artist = artist;
     }
 
-    public void setGenere(String genere)
+    public void setGenre(String genere)
     {
-        this.genere = genere;
+        this.genre = genere;
     }
 
     public void setName(String name)
