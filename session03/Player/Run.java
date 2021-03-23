@@ -188,7 +188,7 @@ public class Run
                     {
                         userChoice();
 
-                        String address = runtimeMusicCollection.getMusics().get(choice - 1).getAddress();
+                        String address = artist.getMusics().get(choice - 1).getAddress();
 
                         if (Player.startPlay(address))
                         {
@@ -246,6 +246,16 @@ public class Run
     }
 
 
+    public void removeArtist()
+    {
+        System.out.print("Enter the name : ");
+        String name = scanner.next();
+
+        runtimeMusicCollection.removeArtist(name);
+
+    }
+
+
     public void prinGenresMenu()
     {
         System.out.println(genresMenu);
@@ -255,12 +265,49 @@ public class Run
         switch (choice)
         {
             case 1:
+                if (runtimeMusicCollection.displayGenres())
+                {
+                    userChoice();
+
+                    Genre genre = runtimeMusicCollection.getGenres().get(choice - 1);
+
+                    if (genre.printMusics())
+                    {
+                        userChoice();
+
+                        String address = genre.getMusics().get(choice - 1).getAddress();
+
+                        if (Player.startPlay(address))
+                        {
+                            System.out.println("Music finished.");
+                        }
+                        else
+                        {
+                            System.out.println("Couldn't open the file.");
+
+                        }
+
+                    }
+                    else
+                    {
+                        prinGenresMenu();
+                    }
+
+                }
+                else
+                {
+                    prinGenresMenu();
+                }
                 break;
 
             case 2:
+                addGenre();
+                prinGenresMenu();
                 break;
 
             case 3:
+                removeGenre();
+                prinGenresMenu();
                 break;
 
             case 4:
@@ -271,12 +318,26 @@ public class Run
     }
 
 
-    public void removeArtist()
+
+    public void addGenre()
     {
-        System.out.print("Enter the name : ");
+        System.out.print("Enter the name of genre : ");
         String name = scanner.next();
 
-        runtimeMusicCollection.removeArtist(name);
+        Genre genreToAdd = new Genre(name);
+
+        runtimeMusicCollection.addGenre(genreToAdd);
+
+    }
+
+
+    public void removeGenre()
+    {
+        System.out.print("Enter the name : ");
+
+        String name = scanner.next();
+
+        runtimeMusicCollection.removeGenre(name);
 
     }
 
