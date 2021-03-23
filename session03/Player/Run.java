@@ -1,6 +1,8 @@
 
 import java.util.Scanner;
 
+// TODO: 3/23/2021 javadoc is not available -_-
+
 public class Run
 {
     private String mainMenu;
@@ -68,7 +70,7 @@ public class Run
                 break;
 
             case 3:
-                prinGenresMenu();
+                printGenresMenu();
                 break;
 
             case 4:
@@ -150,7 +152,14 @@ public class Run
 
         Music musicToAdd = new Music(name, genre, artistName, address, year);
 
-        runtimeMusicCollection.addMusic(musicToAdd);
+        if(runtimeMusicCollection.addMusic(musicToAdd))
+        {
+            System.out.println("Music added.");
+        }
+        else
+        {
+            System.out.println("Music is already available.");
+        }
 
         // TODO: 3/23/2021 after adding music to musics list artists and genres should be updated too
 
@@ -241,7 +250,14 @@ public class Run
 
         Artist artistToAdd = new Artist(name);
 
-        runtimeMusicCollection.addArtist(artistToAdd);
+        if(runtimeMusicCollection.addArtist(artistToAdd))
+        {
+            System.out.println("Artist added.");
+        }
+        else
+        {
+            System.out.println("Artist already exists.");
+        }
 
     }
 
@@ -256,7 +272,7 @@ public class Run
     }
 
 
-    public void prinGenresMenu()
+    public void printGenresMenu()
     {
         System.out.println(genresMenu);
 
@@ -290,24 +306,24 @@ public class Run
                     }
                     else
                     {
-                        prinGenresMenu();
+                        printGenresMenu();
                     }
 
                 }
                 else
                 {
-                    prinGenresMenu();
+                    printGenresMenu();
                 }
                 break;
 
             case 2:
                 addGenre();
-                prinGenresMenu();
+                printGenresMenu();
                 break;
 
             case 3:
                 removeGenre();
-                prinGenresMenu();
+                printGenresMenu();
                 break;
 
             case 4:
@@ -326,7 +342,14 @@ public class Run
 
         Genre genreToAdd = new Genre(name);
 
-        runtimeMusicCollection.addGenre(genreToAdd);
+        if(runtimeMusicCollection.addGenre(genreToAdd))
+        {
+            System.out.println("Genre added.");
+        }
+        else
+        {
+            System.out.println("Genre already exists.");
+        }
 
     }
 
