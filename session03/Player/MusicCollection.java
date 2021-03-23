@@ -111,10 +111,10 @@ public class MusicCollection
         }
         else
         {
-            for(Artist artistToDisplay : artists)
+            for(Artist artist : artists)
             {
                 System.out.println("Artist " + artistNum + ":");
-                artistToDisplay.print();
+                artist.print();
 
             }
 
@@ -175,15 +175,87 @@ public class MusicCollection
         }
 
     }
-    
-    
-    public void displayGenres()
+
+
+    public boolean displayGenres()
     {
+        int genreNum = 1;
+
+        if (genres.size() == 0)
+        {
+            System.out.println("No genre found.");
+            return false;
+        }
+        else
+        {
+            for(Genre genre : genres)
+            {
+                System.out.println("Genre " + genreNum + ":");
+                genre.print();
+
+            }
+
+        }
+
+        return true;
+        
+
+    }
+    
+    
+    public void addGenre(Genre genre)
+    {
+        if (findGenre(genre.getName()) == null)
+        {
+            genres.add(genre);
+            System.out.println("Genre added.");
+
+        }
+        else
+        {
+            System.out.println("Genre already exists.");
+
+        }
         
     }
     
     
+    public Genre findGenre(String name)
+    {
+        for(Genre genre : genres)
+        {
+            if(genre.getName().equals(name))
+            {
+                return genre;
+
+            }
+        }
+
+        return null;
+        
+    }
     
+    
+    public void removeGenre(String name)
+    {
+        Genre genreToRemove = findGenre(name);
+
+        if (genreToRemove == null)
+        {
+            System.out.println("Genre doesn't exist.");
+
+        }
+        else
+        {
+            genres.remove(genreToRemove);
+            System.out.println("Genre removed.");
+
+        }
+        
+    }
+
+
+
 
     public ArrayList<Artist> getArtists()
     {
