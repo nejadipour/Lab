@@ -84,7 +84,7 @@ public class Run
                 break;
 
             case 3:
-                //runtimeMusicCollection.removeMusic();
+                removeMusic();
                 printManiMenu();
                 break;
 
@@ -117,6 +117,21 @@ public class Run
 
         runtimeMusicCollection.addMusic(musicToAdd);
 
+        // TODO: 3/23/2021 after adding music to musics list artists and genres should be updated too
+        
+
+    }
+    
+    
+    public void removeMusic()
+    {
+        System.out.print("Enter the address : ");
+        String address = scanner.next();
+        
+        runtimeMusicCollection.removeMusic(address);
+
+        // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
+        
     }
 
 
