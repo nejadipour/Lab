@@ -5,10 +5,11 @@ public class Run
 {
     private String mainMenu;
     private String musicsMenu;
+    private String artistsMenu;
+    private String genresMenu;
     private int choice;
     private Scanner scanner;
     public MusicCollection runtimeMusicCollection;
-    private Player player;
 
     public Run()
     {
@@ -20,14 +21,27 @@ public class Run
 
         mainMenu =
                 "1.Musics\n" +
-                        "2.Artists\n" +
-                        "3.Genres\n";
+                "2.Artists\n" +
+                "3.Genres\n" +
+                "4.Exit";
 
         musicsMenu =
                 "1.Show musics\n" +
-                        "2.Add music\n" +
-                        "3.Remove music\n" +
-                        "4.Main menu\n";
+                "2.Add music\n" +
+                "3.Remove music\n" +
+                "4.Main menu\n";
+        
+        artistsMenu =
+                "1.Show artists\n" +
+                "2.Add artist\n" +
+                "3.Remove artist\n" +
+                "4.Main menu\n";
+        
+        genresMenu =
+                "1.Show generes\n" +
+                "2.Add genre\n" +
+                "3.Remove genre\n" +
+                "4.Main menu\n";
 
     }
 
@@ -50,12 +64,16 @@ public class Run
                 printMusicsMenu();
                 break;
             case 2:
+                printArtistsMenu();
                 break;
 
             case 3:
+                prinGenresMenu();
                 break;
 
             case 4:
+                System.out.println("Hope U great music times!");
+                System.exit(0);
                 break;
         }
     }
@@ -78,15 +96,14 @@ public class Run
                     if (Player.startPlay(address))
                     {
                         System.out.println("Music finished.");
-                        printManiMenu();
 
                     }
                     else
                     {
                         System.out.println("Couldn't open the file.");
-                        printManiMenu();
 
                     }
+                    printManiMenu();
 
                 }
                 else
@@ -149,6 +166,56 @@ public class Run
 
         // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
 
+    }
+    
+    
+    public void printArtistsMenu()
+    {
+        System.out.println(artistsMenu);
+        
+        userChoice();
+        
+        switch (choice)
+        {
+            case 1:
+                break;
+                
+            case 2:
+                break;
+                
+            case 3:
+                break;
+                
+            case 4:
+                printManiMenu();
+                break;
+        }
+        
+    }
+    
+    
+    public void prinGenresMenu()
+    {
+        System.out.println(genresMenu);
+
+        userChoice();
+
+        switch (choice)
+        {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                printManiMenu();
+                break;
+        }
+        
     }
 
 
