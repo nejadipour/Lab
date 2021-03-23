@@ -18,6 +18,7 @@ public class Genre
         this.name = name;
         musics = new ArrayList<>();
         artists = new ArrayList<>();
+
     }
 
 
@@ -51,25 +52,25 @@ public class Genre
 
         return null;
     }
-    
-    
+
+
     public void addArtist(Artist artist)
     {
         if (findArtist(artist.getName()) == null)
         {
             artists.add(artist);
             System.out.println("Artist added.");
-            
+
         }
-        
+
         else
         {
             System.out.println("Artist is available.");
         }
-        
+
     }
-    
-    
+
+
     public Artist findArtist(String name)
     {
         for (Artist artist : artists)
@@ -78,14 +79,44 @@ public class Genre
             {
                 return artist;
             }
-            
+
         }
-        
+
         return null;
     }
 
     public void print()
     {
 
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public ArrayList<Music> getMusics()
+    {
+        return musics;
+    }
+
+    public void setMusics(ArrayList<Music> musics)
+    {
+        this.musics = musics;
+    }
+
+    public ArrayList<Artist> getArtists()
+    {
+        return artists;
+    }
+
+    public void setArtists(ArrayList<Artist> artists)
+    {
+        this.artists = artists;
     }
 }
