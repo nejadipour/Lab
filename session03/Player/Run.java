@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Run
@@ -12,7 +13,7 @@ public class Run
     {
         runtimeMusicCollection = new MusicCollection();
 
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in).useDelimiter("\n");
 
         mainMenu =
                 "1.Musics\n" +
@@ -78,12 +79,12 @@ public class Run
                 break;
 
             case 2:
-                ;
+                addMusic();
                 printMusicsMenu();
                 break;
 
             case 3:
-                runtimeMusicCollection.removeMusic();
+                //runtimeMusicCollection.removeMusic();
                 printManiMenu();
                 break;
 
@@ -92,6 +93,38 @@ public class Run
                 break;
 
         }
+    }
+
+
+    public void addMusic()
+    {
+        System.out.print("Enter the name : ");
+        String name = scanner.next();
+
+        System.out.print("Enter the artist : ");
+        String artistName = scanner.next();
+
+        System.out.print("Enter the genre : ");
+        String genre = scanner.next();
+
+        System.out.print("Enter the address : ");
+        String address = scanner.next();
+
+        System.out.print("Enter the year : ");
+        int year = scanner.nextInt();
+
+        Music musicToAdd = new Music(name, genre, artistName, address, year);
+
+        runtimeMusicCollection.addMusic(musicToAdd);
+
+    }
+
+
+    public static void main(String[] args)
+    {
+        Run run = new Run();
+
+        run.printManiMenu();
     }
 
 
