@@ -55,7 +55,7 @@ public class Run
     }
 
 
-    public void printManiMenu()
+    public void printMainMenu()
     {
         System.out.println(mainMenu);
         userChoice();
@@ -106,7 +106,7 @@ public class Run
                         System.out.println("Couldn't open the file.");
 
                     }
-                    printManiMenu();
+                    printMusicsMenu();
 
                 }
                 else
@@ -122,11 +122,11 @@ public class Run
 
             case 3:
                 removeMusic();
-                printManiMenu();
+                printMainMenu();
                 break;
 
             case 4:
-                printManiMenu();
+                printMainMenu();
                 break;
 
         }
@@ -209,6 +209,7 @@ public class Run
                             System.out.println("Couldn't open the file.");
 
                         }
+                        printArtistsMenu();
 
                     }
                     else
@@ -236,7 +237,7 @@ public class Run
                 break;
 
             case 4:
-                printManiMenu();
+                printMainMenu();
                 break;
         }
 
@@ -302,6 +303,7 @@ public class Run
                             System.out.println("Couldn't open the file.");
 
                         }
+                        printGenresMenu();
 
                     }
                     else
@@ -327,7 +329,7 @@ public class Run
                 break;
 
             case 4:
-                printManiMenu();
+                printMainMenu();
                 break;
         }
 
@@ -369,7 +371,7 @@ public class Run
     {
         Run run = new Run();
 
-        run.printManiMenu();
+        run.printMainMenu();
     }
 
 
