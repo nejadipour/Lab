@@ -172,7 +172,15 @@ public class Run
         System.out.print("Enter the address : ");
         String address = scanner.next();
 
-        runtimeMusicCollection.removeMusic(address);
+        if (runtimeMusicCollection.removeMusic(address))
+        {
+            System.out.println("Music removed.");
+
+        }
+        else
+        {
+            System.out.println("Music is not available.");
+        }
 
         // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
 
