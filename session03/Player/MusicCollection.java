@@ -239,6 +239,8 @@ public class MusicCollection
                 genre.print();
 
                 genreNum++;
+                
+                genreNum++;
 
             }
 
