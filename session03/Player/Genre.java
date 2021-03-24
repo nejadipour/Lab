@@ -46,6 +46,13 @@ public class Genre
 
         return null;
     }
+    
+    
+    public void removeMusic(Music music)
+    {
+        musics.remove(music);
+        
+    }
 
 
     public void addArtist(Artist artist)
