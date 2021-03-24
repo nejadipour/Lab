@@ -26,12 +26,6 @@ public class Artist
         if (findMusic(music.getName()) == null)
         {
             musics.add(music);
-            System.out.println("Music added.");
-
-        }
-        else
-        {
-            System.out.println("Music is already available.");
 
         }
 
