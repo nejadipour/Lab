@@ -27,12 +27,6 @@ public class Genre
         if (findMusic(music.getName()) == null)
         {
             musics.add(music);
-            System.out.println("Music added.");
-
-        }
-        else
-        {
-            System.out.println("Music is already available.");
 
         }
 
@@ -87,6 +81,33 @@ public class Genre
 
     public void print()
     {
+        System.out.println(getName() + " | " + getMusics().size() + " musics");
+
+    }
+
+
+    public boolean printMusics()
+    {
+        int musicNum = 1;
+
+        if (musics.size() == 0)
+        {
+            System.out.println("No music found.");
+            return false;
+
+        }
+        else
+        {
+            for (Music music : musics)
+            {
+                System.out.println("Music " + musicNum + ":");
+                music.print();
+
+            }
+
+            return true;
+
+        }
 
     }
 
