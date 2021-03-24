@@ -1,3 +1,5 @@
+import com.sun.source.tree.ArrayAccessTree;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -105,18 +107,26 @@ public class MusicCollection
     }
 
 
-    public void removeMusic(String address)
+    public boolean removeMusic(String address)
     {
         Music musicToRemove = findMusic(address);
 
         if (musicToRemove == null)
         {
-            System.out.println("Music is not available.");
+            return false;
         }
         else
         {
             musics.remove(musicToRemove);
-            System.out.println("Music removed.");
+
+            Artist artist = findArtist(musicToRemove.getArtist());
+            artist.removeMusic(musicToRemove);
+
+            Genre genre = findGenre(musicToRemove.getGenre());
+            genre.removeMusic(musicToRemove);
+
+            return true;
+
         }
 
     }
@@ -193,7 +203,18 @@ public class MusicCollection
         }
         else
         {
+            ArrayList<Music> musicsToRemove = artistToRemove.getMusics();
+
+            while(musicsToRemove.size() != 0)
+            {
+                Music music = musicsToRemove.get(0);
+                removeMusic(music.getAddress());
+                musicsToRemove.remove(music);
+
+            }
+
             artists.remove(artistToRemove);
+
             System.out.println("Artist removed.");
 
         }
@@ -274,7 +295,17 @@ public class MusicCollection
         }
         else
         {
+            ArrayList<Music> musicsToRemove = genreToRemove.getMusics();
+            while(musicsToRemove.size() != 0)
+            {
+                Music music = musicsToRemove.get(0);
+                removeMusic(music.getAddress());
+                musicsToRemove.remove(music);
+
+            }
+
             genres.remove(genreToRemove);
+
             System.out.println("Genre removed.");
 
         }
