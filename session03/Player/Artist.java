@@ -46,6 +46,13 @@ public class Artist
 
         return null;
     }
+    
+    
+    public void removeMusic(Music music)
+    {
+        musics.remove(music);
+        
+    }
 
 
     public void print()
