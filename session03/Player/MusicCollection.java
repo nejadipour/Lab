@@ -16,6 +16,7 @@ public class MusicCollection
     private ArrayList<Artist> artists;
     private ArrayList<Music> musics;
     private ArrayList<Genre> genres;
+    private ArrayList<Music> favorites;
 
 
     public MusicCollection()
@@ -23,6 +24,7 @@ public class MusicCollection
         artists = new ArrayList<>();
         musics = new ArrayList<>();
         genres = new ArrayList<>();
+        favorites = new ArrayList<>();
 
     }
 
@@ -239,8 +241,7 @@ public class MusicCollection
                 genre.print();
 
                 genreNum++;
-                
-                genreNum++;
+
 
             }
 
@@ -315,6 +316,77 @@ public class MusicCollection
     }
 
 
+    public boolean displayFavorites()
+    {
+        int favoriteNum = 1;
+
+        if (favorites.size() == 0)
+        {
+            System.out.println("No favorite found.");
+            return false;
+
+        }
+        else
+        {
+            for(Music music : favorites)
+            {
+                System.out.println("Favorite " + favoriteNum + ":");
+                music.print();
+
+                favoriteNum++;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+    public void addFavorite(Music music)
+    {
+        if (findFavorite(music.getAddress()) == null)
+        {
+            favorites.add(music);
+            System.out.println("Music added.");
+
+        }
+        else
+        {
+            System.out.println("Music is already in favorites.");
+
+        }
+
+
+    }
+
+
+    public void removeFavorite(Music music)
+    {
+        favorites.remove(music);
+        System.out.println("Music removed from favorites.");
+
+    }
+
+
+    public Music findFavorite(String address)
+    {
+        for (Music music : favorites)
+        {
+            if (music.getAddress().equals(address))
+            {
+                return music;
+
+            }
+
+        }
+
+        return null;
+        
+    }
+
+
 
 
     public ArrayList<Artist> getArtists()
@@ -345,5 +417,10 @@ public class MusicCollection
     public void setGenres(ArrayList<Genre> genres)
     {
         this.genres = genres;
+    }
+
+    public ArrayList<Music> getFavorites()
+    {
+        return favorites;
     }
 }
