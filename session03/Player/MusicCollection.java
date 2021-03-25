@@ -2,6 +2,7 @@ import com.sun.source.tree.ArrayAccessTree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,7 @@ public class MusicCollection
     private ArrayList<Music> musics;
     private ArrayList<Genre> genres;
     private ArrayList<Music> favorites;
+    private ArrayList<Music> searchResult;
 
 
     public MusicCollection()
@@ -25,6 +27,7 @@ public class MusicCollection
         musics = new ArrayList<>();
         genres = new ArrayList<>();
         favorites = new ArrayList<>();
+        searchResult = new ArrayList<>();
 
     }
 
@@ -383,8 +386,51 @@ public class MusicCollection
         }
 
         return null;
-        
+
     }
+
+
+    public boolean search(String word)
+    {
+        for(Music music : musics)
+        {
+            if (music.getName().toLowerCase().contains(word.toLowerCase()) ||
+                music.getArtist().toLowerCase().contains(word.toLowerCase()) ||
+                music.getGenre().toLowerCase().contains(word.toLowerCase()))
+            {
+                searchResult.add(music);
+
+            }
+
+        }
+
+        if (searchResult.size() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+
+    public void displayResults()
+    {
+        int resNum = 1;
+
+        for (Music music : searchResult)
+        {
+            System.out.println("Result " + resNum + ":");
+
+            music.print();
+
+            resNum++;
+        }
+
+    }
+
 
 
 
@@ -422,5 +468,16 @@ public class MusicCollection
     public ArrayList<Music> getFavorites()
     {
         return favorites;
+    }
+
+    public ArrayList<Music> getSearchResult()
+    {
+        return searchResult;
+    }
+
+    public void setSearchResult(ArrayList<Music> searchResult)
+    {
+        this.searchResult = searchResult;
+
     }
 }
