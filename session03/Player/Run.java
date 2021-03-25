@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // TODO: 3/23/2021 javadoc is not available -_-
@@ -88,6 +89,10 @@ public class Run
 
             case 4:
                 printFavoriteMenu();
+
+            case 5:
+                search();
+                break;
 
             case 6:
                 System.out.println("Hope U great music times!");
@@ -449,7 +454,7 @@ public class Run
             Music musicToAdd = runtimeMusicCollection.findMusic(address);
 
             runtimeMusicCollection.addFavorite(musicToAdd);
-            
+
         }
 
     }
@@ -468,6 +473,43 @@ public class Run
             runtimeMusicCollection.removeFavorite(musicToRemove);
 
         }
+
+    }
+
+
+    public void search()
+    {
+        System.out.print("Enter the name of music, artist, genre : ");
+        String wordToSearch = scanner.next();
+
+        if (runtimeMusicCollection.search(wordToSearch))
+        {
+            runtimeMusicCollection.displayResults();
+
+            userChoice();
+
+            String address = runtimeMusicCollection.getSearchResult().get(choice - 1).getAddress();
+
+            if (Player.startPlay(address))
+            {
+                System.out.println("Music finished.");
+
+            }
+            else
+            {
+                System.out.println("Couldn't open the file.");
+
+            }
+
+            ArrayList<Music>searchResults = new ArrayList<>();
+            runtimeMusicCollection.setSearchResult(searchResults);
+
+        }
+        else
+        {
+            System.out.println("Nothing found.");
+        }
+        printMainMenu();
 
     }
 
