@@ -9,6 +9,7 @@ public class Run
     private String musicsMenu;
     private String artistsMenu;
     private String genresMenu;
+    private String favoriteMenu;
     private int choice;
     private Scanner scanner;
     public MusicCollection runtimeMusicCollection;
@@ -22,10 +23,14 @@ public class Run
 
 
         mainMenu =
-                "1.Musics\n" +
-                "2.Artists\n" +
-                "3.Genres\n" +
-                "4.Exit\n";
+                """
+                        1.Musics
+                        2.Artists
+                        3.Genres
+                        4.Favorites
+                        5.Search
+                        6.Exit
+                        """;
 
         musicsMenu =
                 "1.Show musics\n" +
@@ -44,6 +49,14 @@ public class Run
                 "2.Add genre\n" +
                 "3.Remove genre\n" +
                 "4.Main menu\n";
+
+        favoriteMenu =
+                """
+                        1.Show favorites
+                        2.Add favorite
+                        3.Remove favorite
+                        4.Main menu
+                        """;
 
     }
 
@@ -74,6 +87,9 @@ public class Run
                 break;
 
             case 4:
+                printFavoriteMenu();
+
+            case 6:
                 System.out.println("Hope U great music times!");
                 System.exit(0);
                 break;
@@ -371,6 +387,87 @@ public class Run
         String name = scanner.next();
 
         runtimeMusicCollection.removeGenre(name);
+
+    }
+
+
+    public void printFavoriteMenu()
+    {
+        System.out.println(favoriteMenu);
+
+        userChoice();
+
+        switch (choice)
+        {
+            case 1->
+            {
+                if (runtimeMusicCollection.displayFavorites())
+                {
+                    userChoice();
+
+                    String address = runtimeMusicCollection.getFavorites().get(choice - 1).getAddress();
+                    if (Player.startPlay(address))
+                    {
+                        System.out.println("Music finished.");
+
+                    }
+                    else
+                    {
+                        System.out.println("Couldn't open the file.");
+
+                    }
+
+                }
+
+                printFavoriteMenu();
+
+            }
+            case 2->
+            {
+                addFavorite();
+                printFavoriteMenu();
+            }
+            case 3->
+            {
+                removeFavorite();
+                printFavoriteMenu();
+            }
+            case 4-> printMusicsMenu();
+
+        }
+    }
+
+
+    public void addFavorite()
+    {
+        if (runtimeMusicCollection.displayMusics())
+        {
+            userChoice();
+
+            String address = runtimeMusicCollection.getMusics().get(choice - 1).getAddress();
+
+            Music musicToAdd = runtimeMusicCollection.findMusic(address);
+
+            runtimeMusicCollection.addFavorite(musicToAdd);
+            
+        }
+
+    }
+
+
+    public void removeFavorite()
+    {
+        if (runtimeMusicCollection.displayFavorites())
+        {
+            userChoice();
+
+            String address = runtimeMusicCollection.getFavorites().get(choice - 1).getAddress();
+
+            Music musicToRemove = runtimeMusicCollection.findMusic(address);
+
+            runtimeMusicCollection.removeFavorite(musicToRemove);
+
+        }
 
     }
 
