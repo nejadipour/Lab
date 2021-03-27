@@ -1,26 +1,22 @@
-import com.sun.source.tree.ArrayAccessTree;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Scanner;
 
 /**
  * A class to hold details of audio files.
- *
  * @author Alireza Nejadipour
- * @version 2021.Mar.13
+ * @version 6 (3/26/2021)
  */
 
 public class MusicCollection
 {
-    private ArrayList<Artist> artists;
-    private ArrayList<Music> musics;
-    private ArrayList<Genre> genres;
-    private ArrayList<Music> favorites;
+    private final ArrayList<Artist> artists;
+    private final ArrayList<Music> musics;
+    private final ArrayList<Genre> genres;
+    private final ArrayList<Music> favorites;
     private ArrayList<Music> searchResult;
 
-
+    /**
+     * create a new music collection
+     */
     public MusicCollection()
     {
         artists = new ArrayList<>();
@@ -32,6 +28,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * all the musics available in the library will be placed by this method
+     * @return if no music is available returns false
+     */
     public boolean displayMusics()
     {
         int musicNum = 1;
@@ -56,9 +56,15 @@ public class MusicCollection
             return true;
 
         }
+
     }
 
 
+    /**
+     * adds a new music to the list of musics
+     * @param music the music to be added
+     * @return if the music is not new and it is found in the library returns false
+     */
     public boolean addMusic(Music music)
     {
         if (findMusic(music.getAddress()) == null)
@@ -71,6 +77,7 @@ public class MusicCollection
             {
                 artist = new Artist(artistName);
                 artists.add(artist);
+
             }
             artist.addMusic(music);
 
@@ -80,11 +87,11 @@ public class MusicCollection
             {
                 genre = new Genre(genreName);
                 genres.add(genre);
+
             }
             genre.addMusic(music);
 
             return true;
-
 
         }
         else
@@ -96,6 +103,12 @@ public class MusicCollection
     }
 
 
+    /**
+     * looks into the musics list to find a music by the given address
+     * each music has its particular address
+     * @param address the address of where music is located
+     * @return if the music is found returns the music, else returns null
+     */
     public Music findMusic(String address)
     {
         for (Music music : musics)
@@ -109,9 +122,15 @@ public class MusicCollection
         }
 
         return null;
+
     }
 
 
+    /**
+     * removes the passed music from the musics list
+     * @param address the address of music to remove
+     * @return if music is not available returns false-_-
+     */
     public boolean removeMusic(String address)
     {
         Music musicToRemove = findMusic(address);
@@ -137,6 +156,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * all the artists of the music library will be placed by this method
+     * @return if no artist is available in the musics list it returns false
+     */
     public boolean displayArtists()
     {
         int artistNum = 1;
@@ -164,6 +187,11 @@ public class MusicCollection
     }
 
 
+    /**
+     * adds the given artist to the artists' list
+     * @param artist the artist that should be added
+     * @return false if the artist is already available
+     */
     public boolean addArtist(Artist artist)
     {
         if (findArtist(artist.getName()) == null)
@@ -181,6 +209,11 @@ public class MusicCollection
     }
 
 
+    /**
+     * the method will search the list of artists to find the artist by given name
+     * @param name the name of artist that should be found
+     * @return if the artist is found returns the artist, else returns null
+     */
     public Artist findArtist(String name)
     {
         for(Artist artist : artists)
@@ -190,6 +223,7 @@ public class MusicCollection
                 return artist;
 
             }
+
         }
 
         return null;
@@ -197,6 +231,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * removes the artist from the list by given name
+     * @param name the name of artist that should be removed
+     */
     public void removeArtist(String name)
     {
         Artist artistToRemove = findArtist(name);
@@ -208,6 +246,7 @@ public class MusicCollection
         }
         else
         {
+            // remove all the musics of the artist
             ArrayList<Music> musicsToRemove = artistToRemove.getMusics();
 
             while(musicsToRemove.size() != 0)
@@ -227,6 +266,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * all the genres available in the music library will be placed by this method
+     * @return if there is no genre available the method will return false
+     */
     public boolean displayGenres()
     {
         int genreNum = 1;
@@ -245,24 +288,26 @@ public class MusicCollection
 
                 genreNum++;
 
-
             }
 
         }
 
         return true;
 
-
     }
 
 
+    /**
+     * new genre will be added to the genres' list by this method
+     * @param genre the genre that should be added
+     * @return if the genre is already available it will return false
+     */
     public boolean addGenre(Genre genre)
     {
         if (findGenre(genre.getName()) == null)
         {
             genres.add(genre);
             return true;
-
 
         }
         else
@@ -274,6 +319,11 @@ public class MusicCollection
     }
 
 
+    /**
+     * the method will search the genres' list to find the genre by the given name
+     * @param name the name of the genre that should be found
+     * @return if the genre is not available returns null
+     */
     public Genre findGenre(String name)
     {
         for(Genre genre : genres)
@@ -283,6 +333,7 @@ public class MusicCollection
                 return genre;
 
             }
+
         }
 
         return null;
@@ -290,6 +341,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * removes the genre from he list by the given name
+     * @param name if the genre is not found returns false
+     */
     public void removeGenre(String name)
     {
         Genre genreToRemove = findGenre(name);
@@ -301,6 +356,7 @@ public class MusicCollection
         }
         else
         {
+            // remove all the songs of the genre
             ArrayList<Music> musicsToRemove = genreToRemove.getMusics();
             while(musicsToRemove.size() != 0)
             {
@@ -319,6 +375,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * favorite musics will be printed
+     * @return if the favorites' list is empty returns false
+     */
     public boolean displayFavorites()
     {
         int favoriteNum = 1;
@@ -365,6 +425,10 @@ public class MusicCollection
     }
 
 
+    /**
+     * removes given music from the favorites' list
+     * @param music the music that should remove from the list of favorites
+     */
     public void removeFavorite(Music music)
     {
         favorites.remove(music);
@@ -373,6 +437,11 @@ public class MusicCollection
     }
 
 
+    /**
+     * finds the music from the favorites' list by the given address
+     * @param address the location of the music that should be removed
+     * @return null if music is not available
+     */
     public Music findFavorite(String address)
     {
         for (Music music : favorites)
@@ -390,10 +459,16 @@ public class MusicCollection
     }
 
 
+    /**
+     * searches the data to find the given string
+     * @param word the string that search will be based on
+     * @return if nothing is found returns false
+     */
     public boolean search(String word)
     {
         for(Music music : musics)
         {
+            // search is not case sensitive
             if (music.getName().toLowerCase().contains(word.toLowerCase()) ||
                 music.getArtist().toLowerCase().contains(word.toLowerCase()) ||
                 music.getGenre().toLowerCase().contains(word.toLowerCase()))
@@ -404,18 +479,14 @@ public class MusicCollection
 
         }
 
-        if (searchResult.size() == 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return searchResult.size() != 0;
 
     }
 
 
+    /**
+     * search results will be placed by this method
+     */
     public void displayResults()
     {
         int resNum = 1;
@@ -427,57 +498,72 @@ public class MusicCollection
             music.print();
 
             resNum++;
+
         }
 
     }
 
 
-
-
-
+    /**
+     * gets the artist available
+     * @return the artists field will be returned
+     */
     public ArrayList<Artist> getArtists()
     {
         return artists;
+
     }
 
-    public void setArtists(ArrayList<Artist> artists)
-    {
-        this.artists = artists;
-    }
-
+    /**
+     * gets all the musics of the music player
+     * @return field musics will be returned
+     */
     public ArrayList<Music> getMusics()
     {
         return musics;
+
     }
 
-    public void setMusics(ArrayList<Music> musics)
-    {
-        this.musics = musics;
-    }
-
+    /**
+     * gets genres available in the player's library
+     * @return genres field
+     */
     public ArrayList<Genre> getGenres()
     {
         return genres;
+
     }
 
-    public void setGenres(ArrayList<Genre> genres)
-    {
-        this.genres = genres;
-    }
-
+    /**
+     * gets favorites musics
+     * @return favorites field will be returned
+     */
     public ArrayList<Music> getFavorites()
     {
         return favorites;
+
     }
 
+    /**
+     * gets search results after searching a word
+     * @return searchResults field will be returned
+     */
     public ArrayList<Music> getSearchResult()
     {
         return searchResult;
+
     }
 
+    /**
+     * each time searching and finding is finished
+     * the searchResults list should get empty
+     * it happens by this method;)
+     * @param searchResult sets the searchResult field
+     */
     public void setSearchResult(ArrayList<Music> searchResult)
     {
         this.searchResult = searchResult;
 
     }
+
 }
