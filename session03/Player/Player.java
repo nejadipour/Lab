@@ -1,5 +1,3 @@
-// Java program to play an Audio 
-// file using Clip Object 
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,35 +8,42 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * this class is used to play music from the file path
+ * u can pause and resume it
+ * @author Alireza Nejadipour
+ * @version 3 (3/25/2021)
+ */
 public class Player
 {
     // to store current position
     long currentFrame;
     Clip clip;
-    private String playerMenu;
-    private Scanner scanner;
+    private final String playerMenu;
+    private final Scanner scanner;
 
     // current status of clip
     String status;
 
     AudioInputStream audioInputStream;
-    private String filePath;
 
-    // constructor to initialize streams and clip
+    /**
+     * create a new player with given parameters
+     * @param filePath the music path
+     */
     public Player(String filePath)
             throws UnsupportedAudioFileException,
             IOException, LineUnavailableException
     {
         playerMenu =
-                "1.pause\n" +
-                "2.resume\n" +
-                "3.stop\n";
-
-        this.filePath = filePath;
+                """
+                        1.pause
+                        2.resume
+                        3.stop
+                        """;
 
         // create AudioInputStream object
-        audioInputStream =
-                AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+        audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
         // create clip reference
         clip = AudioSystem.getClip();
@@ -48,11 +53,16 @@ public class Player
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
 
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in).useDelimiter("\n");
 
     }
 
 
+    /**
+     * starts playing music from the file path
+     * @param filePath the address of the music
+     * @return if the file is opened successfully returns true
+     */
     public static boolean startPlay(String filePath)
     {
         try
@@ -82,14 +92,22 @@ public class Player
 
     }
 
+
+    /**
+     * while playing music options are placed by this method
+     */
     private void printPlayerMenu()
     {
         System.out.println(playerMenu);
 
     }
 
-    // Work as the user enters his choice
 
+    /**
+     * user's choice is scanned in this method
+     * the method calls related methods based on user's choice
+     * @return if the request is stop it returns true
+     */
     private boolean userChoice()
             throws IOException, LineUnavailableException, UnsupportedAudioFileException
     {
@@ -99,19 +117,14 @@ public class Player
 
         switch (choice)
         {
-            case 1:
-                pause();
-                break;
-
-            case 2:
-                resumeAudio();
-                break;
-
-            case 3:
+            case 1 -> pause();
+            case 2 -> resumeAudio();
+            case 3 ->
+            {
                 pause();
                 return true; //means music is finished
-
-            default:
+            }
+            default ->
             {
                 System.out.println("Invalid input.");
                 userChoice();
@@ -124,7 +137,10 @@ public class Player
 
     }
 
-    // Method to play the audio
+
+    /**
+     * method to play music
+     */
     public void play()
     {
         //start the clip
@@ -133,7 +149,10 @@ public class Player
         status = "play";
     }
 
-    // Method to pause the audio
+
+    /**
+     * method to pause the music
+     */
     public void pause()
     {
         if (status.equals("paused"))
@@ -150,16 +169,21 @@ public class Player
 
     }
 
-    // Method to resume the audio
+
+    /**
+     * method to resume the music
+     */
     public void resumeAudio()
     {
         if (status.equals("play"))
         {
             System.out.println("Audio is already being played");
             return;
+
         }
 
         this.play();
+
     }
 
 }
