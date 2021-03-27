@@ -4,24 +4,30 @@ import java.util.ArrayList;
  * A class to hold details of each genre
  *
  * @author Alireza Nejadipour
- * @version 2021.Mar.13
+ * @version 4.2 (3/25/2021)
  */
 
 public class Genre
 {
-    private String name;
-    private ArrayList<Music> musics;
-    private ArrayList<Artist> artists;
+    private final String name;
+    private final ArrayList<Music> musics;
 
+    /**
+     * create new Genre by the given name
+     * @param name the name of genre
+     */
     public Genre(String name)
     {
         this.name = name;
         musics = new ArrayList<>();
-        artists = new ArrayList<>();
 
     }
 
 
+    /**
+     * adds the given music to the list of musics
+     * @param music the music to be added
+     */
     public void addMusic(Music music)
     {
         if (findMusic(music.getName()) == null)
@@ -33,6 +39,11 @@ public class Genre
     }
 
 
+    /**
+     * finds the passed music in the list of musics
+     * @param name name of the music to be found
+     * @return the music if it is found
+     */
     public Music findMusic(String name)
     {
         for (Music music : musics)
@@ -40,52 +51,31 @@ public class Genre
             if (music.getName().equals(name))
             {
                 return music;
+
             }
 
         }
 
         return null;
+
     }
-    
-    
+
+
+    /**
+     * removes the given music from the list of musics
+     * @param music the music to be removed
+     */
     public void removeMusic(Music music)
     {
         musics.remove(music);
-        
-    }
-
-
-    public void addArtist(Artist artist)
-    {
-        if (findArtist(artist.getName()) == null)
-        {
-            artists.add(artist);
-            System.out.println("Artist added.");
-
-        }
-
-        else
-        {
-            System.out.println("Artist is available.");
-        }
 
     }
 
 
-    public Artist findArtist(String name)
-    {
-        for (Artist artist : artists)
-        {
-            if (artist.getName().equals(name))
-            {
-                return artist;
-            }
-
-        }
-
-        return null;
-    }
-
+    /**
+     * prints the information of each genre
+     * like the name and the songs it has
+     */
     public void print()
     {
         System.out.println(getName() + " | " + getMusics().size() + " musics");
@@ -93,6 +83,10 @@ public class Genre
     }
 
 
+    /**
+     * prints the musics available in the genre
+     * @return if there is no song available it returns false
+     */
     public boolean printMusics()
     {
         int musicNum = 1;
@@ -118,33 +112,23 @@ public class Genre
 
     }
 
+
+    /**
+     * gets the name of genre
+     * @return field name is returned
+     */
     public String getName()
     {
         return name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
+    /**
+     * gets the list of musics the genre has
+     * @return musics field
+     */
     public ArrayList<Music> getMusics()
     {
         return musics;
     }
 
-    public void setMusics(ArrayList<Music> musics)
-    {
-        this.musics = musics;
-    }
-
-    public ArrayList<Artist> getArtists()
-    {
-        return artists;
-    }
-
-    public void setArtists(ArrayList<Artist> artists)
-    {
-        this.artists = artists;
-    }
 }
