@@ -1,27 +1,31 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// TODO: 3/23/2021 javadoc is not available -_-
+/**
+ * this class is used to run all the program
+ * @author Alireza Nejadipour
+ * @version 6 (3/26/2021)
+ */
 
 public class Run
 {
-    private String mainMenu;
-    private String musicsMenu;
-    private String artistsMenu;
-    private String genresMenu;
-    private String favoriteMenu;
+    private final String mainMenu;
+    private final String musicsMenu;
+    private final String artistsMenu;
+    private final String genresMenu;
+    private final String favoriteMenu;
     private int choice;
-    private Scanner scanner;
+    private final Scanner scanner;
     public MusicCollection runtimeMusicCollection;
 
+    /**
+     * create a new run
+     */
     public Run()
     {
-
         runtimeMusicCollection = new MusicCollection();
 
         scanner = new Scanner(System.in).useDelimiter("\n");
-
 
         mainMenu =
                 """
@@ -34,22 +38,28 @@ public class Run
                         """;
 
         musicsMenu =
-                "1.Show musics\n" +
-                "2.Add music\n" +
-                "3.Remove music\n" +
-                "4.Main menu\n";
+                """
+                        1.Show musics
+                        2.Add music
+                        3.Remove music
+                        4.Main menu
+                        """;
 
         artistsMenu =
-                "1.Show artists\n" +
-                "2.Add artist\n" +
-                "3.Remove artist\n" +
-                "4.Main menu\n";
+                """
+                        1.Show artists
+                        2.Add artist
+                        3.Remove artist
+                        4.Main menu
+                        """;
 
         genresMenu =
-                "1.Show generes\n" +
-                "2.Add genre\n" +
-                "3.Remove genre\n" +
-                "4.Main menu\n";
+                """
+                        1.Show generes
+                        2.Add genre
+                        3.Remove genre
+                        4.Main menu
+                        """;
 
         favoriteMenu =
                 """
@@ -61,6 +71,10 @@ public class Run
 
     }
 
+
+    /**
+     * anytime the user should choose between
+     */
     public void userChoice()
     {
         System.out.print("Your Choice : ");
@@ -69,6 +83,9 @@ public class Run
     }
 
 
+    /**
+     * prints the main menu
+     */
     public void printMainMenu()
     {
         System.out.println(mainMenu);
@@ -98,21 +115,26 @@ public class Run
                 System.out.println("Hope U great music times!");
                 System.exit(0);
                 break;
+
         }
 
     }
 
 
+    /**
+     * prints the menu related to the musics part
+     */
     public void printMusicsMenu()
     {
         System.out.println(musicsMenu);
 
         userChoice();
-        //E:\\Alireza\\aProgramming\\wav\\ahange shad.wav
+
         switch (choice)
         {
-            case 1:
-                if(runtimeMusicCollection.displayMusics())
+            case 1 ->
+            {
+                if (runtimeMusicCollection.displayMusics())
                 {
                     userChoice();
 
@@ -127,33 +149,34 @@ public class Run
                         System.out.println("Couldn't open the file.");
 
                     }
-                    printMusicsMenu();
 
                 }
-                else
-                {
-                    printMusicsMenu();
-                }
-                break;
-
-            case 2:
+                printMusicsMenu();
+            }
+            case 2 ->
+            {
                 addMusic();
                 printMusicsMenu();
-                break;
 
-            case 3:
+            }
+            case 3 ->
+            {
                 removeMusic();
                 printMainMenu();
-                break;
 
-            case 4:
-                printMainMenu();
-                break;
+            }
+            case 4 -> printMainMenu();
 
         }
+
     }
 
 
+    /**
+     * gets all the information about a music
+     * like name, genre and address
+     * then tries to add it to the musics
+     */
     public void addMusic()
     {
         System.out.print("Enter the name : ");
@@ -176,18 +199,20 @@ public class Run
         if(runtimeMusicCollection.addMusic(musicToAdd))
         {
             System.out.println("Music added.");
+
         }
         else
         {
             System.out.println("Music is already available.");
+
         }
-
-        // TODO: 3/23/2021 after adding music to musics list artists and genres should be updated too
-
 
     }
 
 
+    /**
+     * gets all the information about a music then removes it
+     */
     public void removeMusic()
     {
         System.out.print("Enter the address : ");
@@ -201,13 +226,15 @@ public class Run
         else
         {
             System.out.println("Music is not available.");
-        }
 
-        // TODO: 3/23/2021 when a music is removed artists and genres should be updated too
+        }
 
     }
 
 
+    /**
+     * this method prints the menu related to the artists
+     */
     public void printArtistsMenu()
     {
         System.out.println(artistsMenu);
@@ -216,13 +243,14 @@ public class Run
 
         switch (choice)
         {
-            case 1:
+            case 1 ->
+            {
                 if (runtimeMusicCollection.displayArtists())
                 {
                     userChoice();
                     Artist artist = runtimeMusicCollection.getArtists().get(choice - 1);
 
-                    if(artist.printMusics())
+                    if (artist.printMusics())
                     {
                         userChoice();
 
@@ -238,41 +266,34 @@ public class Run
                             System.out.println("Couldn't open the file.");
 
                         }
-                        printArtistsMenu();
-
-                    }
-                    else
-                    {
-                        printArtistsMenu();
 
                     }
 
                 }
-                else
-                {
-                    printArtistsMenu();
-
-                }
-                break;
-
-            case 2:
+                printArtistsMenu();
+            }
+            case 2 ->
+            {
                 addArtist();
                 printArtistsMenu();
-                break;
 
-            case 3:
+            }
+            case 3 ->
+            {
                 removeArtist();
                 printArtistsMenu();
-                break;
 
-            case 4:
-                printMainMenu();
-                break;
+            }
+            case 4 -> printMainMenu();
         }
 
     }
 
 
+    /**
+     * scans information needed to create a new artist
+     * then adds the artist to the list
+     */
     public void addArtist()
     {
         System.out.print("Enter the name of artist : ");
@@ -283,15 +304,20 @@ public class Run
         if(runtimeMusicCollection.addArtist(artistToAdd))
         {
             System.out.println("Artist added.");
+
         }
         else
         {
             System.out.println("Artist already exists.");
+
         }
 
     }
 
 
+    /**
+     * scans the name and then tries to remove the artist
+     */
     public void removeArtist()
     {
         System.out.print("Enter the name : ");
@@ -302,6 +328,9 @@ public class Run
     }
 
 
+    /**
+     * prints the menu related to the genres part
+     */
     public void printGenresMenu()
     {
         System.out.println(genresMenu);
@@ -310,7 +339,8 @@ public class Run
 
         switch (choice)
         {
-            case 1:
+            case 1 ->
+            {
                 if (runtimeMusicCollection.displayGenres())
                 {
                     userChoice();
@@ -326,46 +356,44 @@ public class Run
                         if (Player.startPlay(address))
                         {
                             System.out.println("Music finished.");
+
                         }
                         else
                         {
                             System.out.println("Couldn't open the file.");
 
                         }
-                        printGenresMenu();
 
-                    }
-                    else
-                    {
-                        printGenresMenu();
                     }
 
                 }
-                else
-                {
-                    printGenresMenu();
-                }
-                break;
+                printGenresMenu();
 
-            case 2:
+            }
+            case 2 ->
+            {
                 addGenre();
                 printGenresMenu();
-                break;
 
-            case 3:
+            }
+            case 3 ->
+            {
                 removeGenre();
                 printGenresMenu();
-                break;
 
-            case 4:
-                printMainMenu();
-                break;
+            }
+            case 4 -> printMainMenu();
+
         }
 
     }
 
 
-
+    /**
+     * scans the name of the genre
+     * creates new genre
+     * and tries to add it to the genres' list
+     */
     public void addGenre()
     {
         System.out.print("Enter the name of genre : ");
@@ -376,15 +404,20 @@ public class Run
         if(runtimeMusicCollection.addGenre(genreToAdd))
         {
             System.out.println("Genre added.");
+
         }
         else
         {
             System.out.println("Genre already exists.");
+
         }
 
     }
 
 
+    /**
+     * scans the name of genre and tries to remove it
+     */
     public void removeGenre()
     {
         System.out.print("Enter the name : ");
@@ -396,6 +429,10 @@ public class Run
     }
 
 
+    /**
+     * prints the menu related to the favorites part
+     * user decides what to happen next
+     */
     public void printFavoriteMenu()
     {
         System.out.println(favoriteMenu);
@@ -431,18 +468,24 @@ public class Run
             {
                 addFavorite();
                 printFavoriteMenu();
+
             }
             case 3->
             {
                 removeFavorite();
                 printFavoriteMenu();
+
             }
             case 4-> printMusicsMenu();
 
         }
+
     }
 
 
+    /**
+     * prints all the musics and then the user decides which music to be added to favorites
+     */
     public void addFavorite()
     {
         if (runtimeMusicCollection.displayMusics())
@@ -460,6 +503,10 @@ public class Run
     }
 
 
+    /**
+     * displays all the favorite musics
+     * then the user decides which music to be removed from favorites
+     */
     public void removeFavorite()
     {
         if (runtimeMusicCollection.displayFavorites())
@@ -477,6 +524,9 @@ public class Run
     }
 
 
+    /**
+     * scans the string user wanna search
+     */
     public void search()
     {
         System.out.print("Enter the name of music, artist, genre : ");
@@ -508,6 +558,7 @@ public class Run
         else
         {
             System.out.println("Nothing found.");
+
         }
         printMainMenu();
 
@@ -520,10 +571,5 @@ public class Run
 
         run.printMainMenu();
     }
-
-
-
-
-
 
 }
