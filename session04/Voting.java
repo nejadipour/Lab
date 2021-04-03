@@ -1,7 +1,8 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import ir.huri.jcal.JalaliCalendar;
+import java.util.GregorianCalendar;
 
 /**
  * this class models a voting
@@ -21,6 +22,7 @@ public class Voting
     {
         this.type = type;
         this.question = question;
+        this.listOfVotesToChoice = new HashMap<>();
 
     }
 
@@ -31,12 +33,24 @@ public class Voting
      */
     public void createChoice(String choice)
     {
+        listOfVotesToChoice.put(choice, null);
 
     }
 
 
     public void vote(Person person, ArrayList<String> choices)
     {
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        JalaliCalendar jalal = new JalaliCalendar(gregorianCalendar);
+
+        voters.add(person);
+        for (String choice : choices)
+        {
+            listOfVotesToChoice.putIfAbsent(choice, null);
+            Vote newVote = new Vote(person, jalal.toString());
+            listOfVotesToChoice.get(choice).add(newVote);
+
+        }
 
 
     }
