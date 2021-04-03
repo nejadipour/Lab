@@ -1,0 +1,38 @@
+public class Vote
+{
+    private Person person;
+    private String date;
+
+    public Vote(Person person, String date)
+    {
+        this.person = person;
+        this.date = date;
+
+    }
+
+
+
+
+    public boolean equals(Vote vote)
+    {
+        return this.date.equals(vote.getDate()) && this.person.equals(vote.getPerson());
+
+    }
+
+
+//    public int hashCode()
+//    {
+//
+//    }
+
+
+    public Person getPerson()
+    {
+        return person;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
+}
