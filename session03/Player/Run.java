@@ -519,6 +519,8 @@ public class Run
 
             runtimeMusicCollection.removeFavorite(musicToRemove);
 
+            System.out.println("Music removed from favorites.");
+
         }
 
     }
