@@ -149,6 +149,8 @@ public class MusicCollection
             Genre genre = findGenre(musicToRemove.getGenre());
             genre.removeMusic(musicToRemove);
 
+            removeFavorite(musicToRemove);
+
             return true;
 
         }
@@ -432,7 +434,6 @@ public class MusicCollection
     public void removeFavorite(Music music)
     {
         favorites.remove(music);
-        System.out.println("Music removed from favorites.");
 
     }
 
