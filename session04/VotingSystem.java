@@ -95,6 +95,8 @@ public class VotingSystem
 
         }
 
+        System.out.println();
+
     }
 
     public ArrayList<Voting> getVotingList()
