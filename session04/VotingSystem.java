@@ -1,6 +1,6 @@
-//import ir.huri.jcal.*;
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class VotingSystem
 {
@@ -34,6 +34,7 @@ public class VotingSystem
         {
             System.out.println("No voting is available!");
             return false;
+
         }
 
         int votingNum = 1;
@@ -83,8 +84,23 @@ public class VotingSystem
 
     public void printResults(int votingNum)
     {
+        Voting voting = votingList.get(votingNum);
+        HashMap<String, HashSet<Vote>> listOfVotesToChoice = voting.getListOfVotesToChoice();
+
+        for (String choice : voting.getChoices())
+        {
+            int size = listOfVotesToChoice.get(choice).size();
+
+            System.out.println(size + " vote(s)" + "\t\t" + choice);
+
+        }
 
     }
 
+    public ArrayList<Voting> getVotingList()
+    {
+        return votingList;
+
+    }
 
 }
