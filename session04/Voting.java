@@ -43,15 +43,40 @@ public class Voting
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
         JalaliCalendar jalal = new JalaliCalendar(gregorianCalendar);
 
-        voters.add(person);
-        for (String choice : choices)
+        if (personExist(person))
         {
-            listOfVotesToChoice.putIfAbsent(choice, null);
-            Vote newVote = new Vote(person, jalal.toString());
-            listOfVotesToChoice.get(choice).add(newVote);
+            System.out.println("You have voted before.");
+
+        }
+        else
+        {
+            voters.add(person);
+            for (String choice : choices)
+            {
+                //listOfVotesToChoice.putIfAbsent(choice, null);
+                Vote newVote = new Vote(person, jalal.toString());
+                listOfVotesToChoice.get(choice).add(newVote);
+
+            }
 
         }
 
+    }
+
+
+    public boolean personExist(Person person)
+    {
+        for (Person personToCheck : voters)
+        {
+            if (personToCheck.equals(person))
+            {
+                return true;
+
+            }
+
+        }
+
+        return false;
 
     }
 
@@ -64,6 +89,12 @@ public class Voting
     public String getQuestion()
     {
         return question;
+    }
+
+    public ArrayList<String> getChoices()
+    {
+        return new ArrayList<>(listOfVotesToChoice.keySet());
+
     }
 
 }
