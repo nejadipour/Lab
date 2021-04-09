@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
@@ -7,6 +6,7 @@ public class Main
     private Scanner scanner;
     private String mainMeu;
     private String typeMenu;
+    private String voteMenu;
     private VotingSystem runtimeSystem;
 
 
@@ -17,12 +17,20 @@ public class Main
                     1.new voting
                     2.vote
                     3.results
+                    4.exit
                         """;
 
         typeMenu =
                 """
                         1.single vote
                         2.multiple vote
+                        """;
+
+        voteMenu =
+                """
+                        1.details
+                        2.back
+                        3.main menu
                         """;
 
         scanner = new Scanner(System.in).useDelimiter("\n");
@@ -40,19 +48,19 @@ public class Main
 
         switch (choice)
         {
-            case 1 ->
-            {
-                newVoting();
-                printMainMenu();
-            }
-            case 2 ->
-            {
-                vote();
-                printMainMenu();
-            }
+            case 1 -> newVoting();
+
+            case 2 -> vote();
+
             case 3 -> results();
 
+            case 4 -> System.exit(0);
+
+            default -> System.out.println("Invalid input.");
+
         }
+
+        printMainMenu();
 
     }
 
@@ -130,9 +138,6 @@ public class Main
             ArrayList<String> choices = new ArrayList<>();
 
 
-
-
-
             if (type == 0)
             {
                 System.out.print("Enter your choice(just one) : ");
@@ -170,12 +175,8 @@ public class Main
             }
 
             runtimeSystem.vote(choice - 1, person, choices);
-            
+
         }
-
-
-
-
 
     }
 
@@ -183,6 +184,65 @@ public class Main
 
     public void results()
     {
+        if (runtimeSystem.printVotingQuestions())
+        {
+            userChoice();
+
+            runtimeSystem.printResults(choice - 1);
+
+            Voting voting = runtimeSystem.getVotingList().get(choice - 1);
+
+            System.out.println(voteMenu);
+
+            userChoice();
+
+            switch (choice)
+            {
+                case 1 -> details(voting);
+
+                case 2 -> results();
+
+                default -> System.out.println("Invalid input.");
+
+            }
+
+        }
+
+    }
+
+
+    public void details(Voting voting)
+    {
+        System.out.println("voters :");
+        ArrayList<Person> voters = voting.getVoters();
+
+        for (Person person : voters)
+        {
+            System.out.println(person.toString());
+
+        }
+        System.out.println();
+
+        System.out.println("Choices :");
+
+        ArrayList<String> choices = voting.getChoices();
+
+        HashMap<String, HashSet<Vote>> listOfVotesToChoice = voting.getListOfVotesToChoice();
+
+        for (String choice : choices)
+        {
+            System.out.println("\"" + choice + "\"");
+            HashSet<Vote> votes = listOfVotesToChoice.get(choice);
+
+            for(Vote vote : votes)
+            {
+                System.out.println(vote.getPerson().toString() + " | date: " + vote.getDate());
+
+            }
+
+            System.out.println();
+
+        }
 
     }
 
