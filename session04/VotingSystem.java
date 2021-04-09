@@ -17,22 +17,38 @@ public class VotingSystem
     public void createVoting(String question, int type, ArrayList<String> choices)
     {
         Voting newVoting = new Voting(type, question);
+        for (String choice : choices)
+        {
+            newVoting.createChoice(choice);
+
+        }
         votingList.add(newVoting);
+
 
     }
 
 
-    public void printVotingQuestions()
+    public boolean printVotingQuestions()
     {
+        if (votingList.size() == 0)
+        {
+            System.out.println("No voting is available!");
+            return false;
+        }
+
         int votingNum = 1;
         for (Voting voting : votingList)
         {
-            System.out.println("Voting " + votingNum + ":");
-            System.out.println(voting.getQuestion());
+            System.out.print("Voting " + votingNum + ":\t");
+            System.out.println("\"" + voting.getQuestion() + "\"");
 
             votingNum++;
 
         }
+
+        System.out.println();
+
+        return true;
 
     }
 
@@ -40,7 +56,7 @@ public class VotingSystem
     public void printVoting(int votingNum)
     {
         Voting voting = votingList.get(votingNum - 1);
-        System.out.println(voting.getQuestion());
+        System.out.println("Question : " + voting.getQuestion());
 
         ArrayList<String> choices = voting.getChoices();
 
@@ -52,7 +68,7 @@ public class VotingSystem
             System.out.println(choice);
 
             choiceNum++;
-            
+
         }
 
     }
@@ -60,7 +76,7 @@ public class VotingSystem
 
     public void vote(int votingNum, Person person, ArrayList<String> choices)
     {
-        
+        votingList.get(votingNum).vote(person, choices);
 
     }
 
