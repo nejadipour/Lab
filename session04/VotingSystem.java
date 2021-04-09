@@ -2,11 +2,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * the system is running basically from here
+ * @version 2.4
+ * @author Alireza Nejadipour
+ */
+
 public class VotingSystem
 {
-    private ArrayList<Voting> votingList;
+    private final ArrayList<Voting> votingList;
 
-
+    /**
+     * create a new system
+     */
     public VotingSystem()
     {
         this.votingList = new ArrayList<>();
@@ -14,6 +22,12 @@ public class VotingSystem
     }
 
 
+    /**
+     * makes a new voting by given parameters
+     * @param question the question of the new voting
+     * @param type if it is single vote or multiple
+     * @param choices the answers of the question
+     */
     public void createVoting(String question, int type, ArrayList<String> choices)
     {
         Voting newVoting = new Voting(type, question);
@@ -24,10 +38,13 @@ public class VotingSystem
         }
         votingList.add(newVoting);
 
-
     }
 
 
+    /**
+     * prints all the questions
+     * @return if no voting is available returns false
+     */
     public boolean printVotingQuestions()
     {
         if (votingList.size() == 0)
@@ -54,6 +71,10 @@ public class VotingSystem
     }
 
 
+    /**
+     * gets the number of the voting and prints its info
+     * @param votingNum the number of the voting
+     */
     public void printVoting(int votingNum)
     {
         Voting voting = votingList.get(votingNum - 1);
@@ -75,6 +96,12 @@ public class VotingSystem
     }
 
 
+    /**
+     * gets the info needed to add a vote
+     * @param votingNum which voting the vote should be added to!
+     * @param person who has voted
+     * @param choices which choices to vote
+     */
     public void vote(int votingNum, Person person, ArrayList<String> choices)
     {
         votingList.get(votingNum).vote(person, choices);
@@ -82,6 +109,10 @@ public class VotingSystem
     }
 
 
+    /**
+     * gets the number of voting and prints details of it
+     * @param votingNum the number of voting
+     */
     public void printResults(int votingNum)
     {
         Voting voting = votingList.get(votingNum);
@@ -99,6 +130,10 @@ public class VotingSystem
 
     }
 
+    /**
+     * gets the list of all voting
+     * @return votingList is returned
+     */
     public ArrayList<Voting> getVotingList()
     {
         return votingList;
