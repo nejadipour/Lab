@@ -1,15 +1,23 @@
 import java.util.*;
 
+/**
+ * this class is used for running the system
+ * @version 1.7
+ * @author Alireza Nejadipour
+ */
+
 public class Main
 {
     private int choice;
-    private Scanner scanner;
-    private String mainMeu;
-    private String typeMenu;
-    private String voteMenu;
-    private VotingSystem runtimeSystem;
+    private final Scanner scanner;
+    private final String mainMeu;
+    private final String typeMenu;
+    private final String voteMenu;
+    private final VotingSystem runtimeSystem;
 
-
+    /**
+     * create a new run
+     */
     public Main()
     {
         mainMeu =
@@ -40,6 +48,9 @@ public class Main
     }
 
 
+    /**
+     * prints the main menu and user decides what to happen
+     */
     public void printMainMenu()
     {
         System.out.println(mainMeu);
@@ -65,7 +76,9 @@ public class Main
     }
 
 
-
+    /**
+     * scans the user's choice
+     */
     public void userChoice()
     {
         System.out.print("Your Choice : ");
@@ -74,6 +87,10 @@ public class Main
     }
 
 
+    /**
+     * gets the details needed to make a new voting
+     * and calls related methods
+     */
     public void newVoting()
     {
         System.out.print("Enter the question : ");
@@ -110,6 +127,10 @@ public class Main
     }
 
 
+    /**
+     * prints the questions and
+     * gets the information needed to vote
+     */
     public void vote()
     {
         if(runtimeSystem.printVotingQuestions())
@@ -133,10 +154,8 @@ public class Main
 
             runtimeSystem.printVoting(choice);
 
-
             int type = voting.getType();
             ArrayList<String> choices = new ArrayList<>();
-
 
             if (type == 0)
             {
@@ -181,7 +200,9 @@ public class Main
     }
 
 
-
+    /**
+     * method is used to see the status of each voting
+     */
     public void results()
     {
         if (runtimeSystem.printVotingQuestions())
@@ -211,6 +232,11 @@ public class Main
     }
 
 
+    /**
+     * prints the details of passed voting
+     * like voters and choices
+     * @param voting the voting to see the details of
+     */
     public void details(Voting voting)
     {
         System.out.println("voters :");
@@ -245,9 +271,6 @@ public class Main
         }
 
     }
-
-
-
 
 
     public static void main(String[] args)
