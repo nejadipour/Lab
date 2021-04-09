@@ -34,7 +34,7 @@ public class Voting
      */
     public void createChoice(String choice)
     {
-        listOfVotesToChoice.put(choice, null);
+        listOfVotesToChoice.put(choice, new HashSet<>());
 
     }
 
@@ -47,10 +47,10 @@ public class Voting
         voters.add(person);
         for (String choice : choices)
         {
-            listOfVotesToChoice.putIfAbsent(choice, new HashSet<>());
+            //listOfVotesToChoice.putIfAbsent(choice, new HashSet<>());
             Vote newVote = new Vote(person, jalal.toString());
             listOfVotesToChoice.get(choice).add(newVote);
-            
+
         }
 
     }
@@ -92,5 +92,12 @@ public class Voting
     public int getType()
     {
         return type;
+
+    }
+
+    public HashMap<String, HashSet<Vote>> getListOfVotesToChoice()
+    {
+        return listOfVotesToChoice;
+
     }
 }
