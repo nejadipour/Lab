@@ -23,6 +23,7 @@ public class Voting
         this.type = type;
         this.question = question;
         this.listOfVotesToChoice = new HashMap<>();
+        this.voters = new ArrayList<>();
 
     }
 
@@ -43,22 +44,13 @@ public class Voting
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
         JalaliCalendar jalal = new JalaliCalendar(gregorianCalendar);
 
-        if (personExist(person))
+        voters.add(person);
+        for (String choice : choices)
         {
-            System.out.println("You have voted before.");
-
-        }
-        else
-        {
-            voters.add(person);
-            for (String choice : choices)
-            {
-                //listOfVotesToChoice.putIfAbsent(choice, null);
-                Vote newVote = new Vote(person, jalal.toString());
-                listOfVotesToChoice.get(choice).add(newVote);
-
-            }
-
+            listOfVotesToChoice.putIfAbsent(choice, new HashSet<>());
+            Vote newVote = new Vote(person, jalal.toString());
+            listOfVotesToChoice.get(choice).add(newVote);
+            
         }
 
     }
@@ -97,4 +89,8 @@ public class Voting
 
     }
 
+    public int getType()
+    {
+        return type;
+    }
 }
